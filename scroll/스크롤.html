@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 5000px;
+            background-image: linear-gradient(#555, #AAA);
+        }
+
+        .content {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 3000px;
+        }
+
+        .scroll-contents {
+            opacity: 0;
+            transform: translateX(-200px);
+            transition: 1500ms;
+        }
+
+        .scroll-contents.active {
+            opacity: 1;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+    <div class = "content scroll-contents"> 나타난다! </div>
+    <div>
+        <img src="물결3.jpg" class="wave scroll-opacity" alt="wave">
+    </div>
+
+    <script>
+        const scrollContent = document.getElementsByClassName('.scroll-contents');
+        const scrollOpacity = document.getElementsByClassName('scroll-opacity');
+
+
+        window.addEventListener('scroll', (e) => {
+            console.log(scrollContent.getBoundingClientRect().top - window.innerHeight < 0)
+            
+            for (let i = 0; i < scrollOpacity.length; i++) {
+                const 좌표 = scrollOpacity[i].getBoundingClientRect().top - window.innerHeight;
+                const 백분율 = -(좌표 + window.innerHeight / 3) / (window.innerHeight / 3);
+                scrollOpacity[i].style.opacity = `${백분율}`;
+            }
+         })
+    </script>
+    
+</body>
+</html>
