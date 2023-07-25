@@ -35,3 +35,50 @@ window.addEventListener('scroll', () => {
         incline.style.left = '0%';
     }
 })
+
+
+
+
+const hambergerButton = document.querySelector('.hamberger');
+const hambergerClick = document.querySelector('.hamberger-click');
+const hambergerNav = document.querySelector('.hamberger-nav');
+const hambergerTransition = 500;
+
+hambergerButton.addEventListener('click', (e) => {
+
+    e.preventDefault();
+    if (hambergerButton.classList.contains('active')) {
+        closeHameberger(hambergerTransition);
+    } else {
+        openHamberger();
+    }
+})
+
+window.addEventListener('scroll', () => {
+    if (hambergerButton.classList.contains('active'))
+        closeHameberger(0);
+})
+
+
+hambergerNav.style.transition = `${hambergerTransition}`
+
+function openHamberger() {
+    hambergerButton.classList.add('active')
+    hambergerClick.classList.add('active');
+    
+setTimeout(()=>{
+    hambergerNav.style.transform = 'none';
+},0)
+
+}
+
+
+function closeHameberger(transition) {
+    hambergerButton.classList.remove('active')
+    hambergerNav.style.transform = `translateX(100%)`;
+    setTimeout(() => {
+
+        hambergerClick.classList.remove('active');
+    }, transition);
+
+}
